@@ -122,4 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.style.display = "none";
         }
     });
+
+    // Verify captcha is checked
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(e) {
+    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+        if (!hCaptcha) {
+            e.preventDefault();
+            alert("Please fill out captcha field")
+            return
+        }
+    });
 });
+
