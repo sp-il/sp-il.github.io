@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#FFFFFF" stroke="#E67E22" stroke-width="4"/>
+  
+  <!-- Bucket Handle -->
+  <path d="M30 40 C 30 20, 70 20, 70 40" stroke="#2C3E50" stroke-width="3" fill="none"/>
+  
+  <!-- Bucket Body -->
+  <path d="M30 40 L35 80 H65 L70 40 Z" fill="#2C3E50" stroke="#2C3E50" stroke-width="2" stroke-linejoin="round"/>
+  
+  <!-- Bucket Rim/Lip -->
+  <ellipse cx="50" cy="40" rx="20" ry="5" fill="#BDC3C7" stroke="#2C3E50" stroke-width="2"/>
+  
+  <!-- Paint Inside -->
+  <ellipse cx="50" cy="40" rx="16" ry="3" fill="#E67E22"/>
+  
+  <!-- Drip -->
+  <path d="M68 45 Q 72 55, 70 65 Q 68 55, 68 45 Z" fill="#E67E22"/>
+  
+  <!-- Splash/Spill on floor -->
+  <ellipse cx="80" cy="85" rx="8" ry="3" fill="#E67E22"/>
+</svg>
