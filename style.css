@@ -111,7 +111,7 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('images/bg.jpg');
+    background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('images/bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -541,4 +541,5 @@ footer {
     margin-bottom: 0.5rem;
     color: #555;
     font-size: 0.95rem;
+
 }
