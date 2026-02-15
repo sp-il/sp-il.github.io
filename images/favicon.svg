@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rounded Square Background: Dark Blue -->
+  <rect x="0" y="0" width="512" height="512" rx="100" ry="100" fill="#2C3E50"/>
+  
+  <!-- "S" Text: White -->
+  <text x="130" y="380" font-family="Arial, sans-serif" font-weight="900" font-size="350" fill="#FFFFFF">S</text>
+  
+  <!-- "P" Text: Orange -->
+  <text x="290" y="380" font-family="Arial, sans-serif" font-weight="900" font-size="350" fill="#E67E22">P</text>
+</svg>
