@@ -543,3 +543,82 @@ footer {
     font-size: 0.95rem;
 
 }
+
+/* Gallery Wrapper for Hover Scroll */
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Scroll Areas */
+.scroll-area {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    width: 10%;
+    max-width: 40px;
+    z-index: 10;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.3s ease;
+    /* Gradient to indicate scroll direction */
+}
+
+.scroll-area.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.scroll-area.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.1), transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .scroll-area {
+        display: block;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .scroll-area::after {
+        content: '‹';
+        color: white;
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .scroll-area.right::after {
+        content: '›';
+    }
+
+    .gallery-wrapper:hover .scroll-area {
+        /* Show zones slightly when hovering the gallery */
+        opacity: 1;
+    }
+
+    .gallery-wrapper:hover .scroll-area::after {
+        opacity: 0.7;
+        /* Visible but subtle when just hovering the gallery */
+    }
+
+    .scroll-area:hover {
+        /* Stronger indication on direct hover */
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+    }
+
+    .scroll-area:hover::after {
+        opacity: 1;
+        transform: scale(1.2);
+        /* Pop effect */
+    }
+
+    .scroll-area.right:hover {
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+    }
+}
