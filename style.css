@@ -386,8 +386,9 @@ footer {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1.5fr 1fr 0.8fr 1.2fr;
+    /* Brand, Services, Quick Links, Contact */
+    gap: 3rem;
     margin-bottom: 3rem;
     text-align: left;
 }
@@ -441,6 +442,11 @@ footer {
     line-height: 1.6;
 }
 
+.footer-section.brand p {
+    max-width: 280px;
+    /* Make brand text wrap sooner */
+}
+
 .footer-section ul {
     list-style: none;
     padding: 0;
@@ -471,27 +477,29 @@ footer {
 }
 
 /* Center Services and Links columns */
+/* Center Services and Links columns - Reverted to Left Align for consistency */
 .footer-section.services-footer,
 .footer-section.links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
+    /* Default block behavior */
+    text-align: left;
 }
 
 .footer-section.services-footer h3,
 .footer-section.links h3 {
-    width: fit-content;
+    width: 100%;
+    /* Full width */
 }
 
 .footer-section.services-footer h3::after,
 .footer-section.links h3::after {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
 }
 
 .footer-section.services-footer ul,
 .footer-section.links ul {
-    width: fit-content;
+    width: 100%;
     text-align: left;
 }
 
@@ -611,6 +619,12 @@ footer {
 
     .contact-container {
         grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        /* Stack footer columns on mobile */
+        gap: 2rem;
     }
 }
 
