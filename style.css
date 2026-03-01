@@ -359,7 +359,7 @@ nav {
 }
 
 .form-group textarea {
-    min-height: 150px;
+    min-height: 210px;
     resize: vertical;
 }
 
