@@ -281,9 +281,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
             if (!hCaptcha) {
                 e.preventDefault();
-                alert("Please fill out captcha field")
-                return
+                alert("Please fill out captcha field");
+                return;
             }
+            // Clear the form fields after a short delay so the submission can proceed
+            setTimeout(() => {
+                form.reset();
+            }, 500);
         });
     }
 
