@@ -287,6 +287,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Clear the form fields after a short delay so the submission can proceed
             setTimeout(() => {
                 form.reset();
+                const successMsg = document.getElementById('form-success-message');
+                if (successMsg) {
+                    successMsg.style.display = 'block';
+                    // Hide the message after a few seconds
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 10000); // 10 seconds
+                }
             }, 500);
         });
     }
