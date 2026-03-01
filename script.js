@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.style.display = "block";
         lightboxImg.src = image.src;
         lightboxImg.alt = image.alt;
+        document.body.style.overflow = "hidden";
     };
 
     // Show Next Image
@@ -115,7 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightbox.style.display === "block") {
             if (e.key === "ArrowRight") showNext();
             if (e.key === "ArrowLeft") showPrev();
-            if (e.key === "Escape") lightbox.style.display = "none";
+            if (e.key === "Escape") {
+                lightbox.style.display = "none";
+                document.body.style.overflow = "";
+            }
         }
     });
 
@@ -145,12 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close the lightbox
     closeBtn.addEventListener('click', () => {
         lightbox.style.display = "none";
+        document.body.style.overflow = "";
     });
 
     // Close lightbox when clicking outside the image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.style.display = "none";
+            document.body.style.overflow = "";
         }
     });
 
