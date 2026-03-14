@@ -716,12 +716,13 @@ footer {
     .logo-img {
         height: auto;
         width: 80%;
-        max-width: 160px;
-        /* Reduce logo size on mobile to fit button */
+        max-width: 180px;
+        /* Balanced logo size to fit with the quote button on mobile */
     }
 
     .mobile-actions {
         display: flex;
+        gap: 0.5rem;
         z-index: 1001;
         /* Ensure it stays above the menu */
     }
