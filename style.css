@@ -65,6 +65,44 @@ p {
     padding: 0 2rem;
 }
 
+/* Top Bar */
+.top-bar {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+div.top-bar .container {
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.top-bar-phone {
+    color: var(--white);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.top-bar-phone i {
+    color: var(--accent-color);
+    margin-right: -4px;
+    /* Compensate for internal font glyph padding to align edge perfectly */
+}
+
+.top-bar-phone:hover {
+    color: var(--accent-color);
+}
+
 /* Header */
 header {
     background-color: var(--white);
@@ -102,6 +140,18 @@ nav {
 
 .nav-links a {
     font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Ensure the last nav item (message button) doesn't push away from the edge */
+.nav-links li:last-child {
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.desktop-message-btn .btn-outline {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
 }
 
 .nav-links a:hover {
@@ -143,22 +193,37 @@ nav {
 
 .btn {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     border-radius: 4px;
     /* Slightly rounded corners */
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
     background-color: var(--accent-color);
     color: var(--white);
+    border: 2px solid var(--accent-color);
 }
 
 .btn-primary:hover {
     background-color: #D35400;
+    border-color: #D35400;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-outline:hover,
+.nav-links a.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
     transform: translateY(-2px);
 }
 
@@ -340,6 +405,21 @@ nav {
 .contact-info h3 {
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.contact-info p {
+    margin-bottom: 0;
+}
+
+.contact-info a {
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
 }
 
 .contact-form {
@@ -376,7 +456,6 @@ nav {
 }
 
 /* Footer */
-/* Footer */
 footer {
     background-color: var(--primary-color);
     color: var(--white);
@@ -396,17 +475,22 @@ footer {
 .footer-brand-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    margin-top: 5px;
+    /* Aligns image top with h3 text line-height */
     margin-bottom: 1.5rem;
 }
 
 .footer-logo {
-    width: 50px;
-    /* Slightly smaller to fit better side-by-side */
+    width: 45px;
     height: auto;
     display: block;
-    margin-bottom: 0;
-    /* Removing bottom margin since we use gap */
+}
+
+.footer-van-img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-top: 1rem;
 }
 
 .footer-section h3 {
@@ -424,7 +508,6 @@ footer {
 
 .footer-brand-header h3::after {
     display: none;
-    /* Remove underline for the logo title if desired, or keep it */
 }
 
 .footer-section h3::after {
@@ -477,7 +560,6 @@ footer {
 }
 
 /* Center Services and Links columns */
-/* Center Services and Links columns - Reverted to Left Align for consistency */
 .footer-section.services-footer,
 .footer-section.links {
     display: block;
@@ -491,12 +573,6 @@ footer {
     /* Full width */
 }
 
-.footer-section.services-footer h3::after,
-.footer-section.links h3::after {
-    left: 0;
-    transform: none;
-}
-
 .footer-section.services-footer ul,
 .footer-section.links ul {
     width: 100%;
@@ -508,15 +584,17 @@ footer {
     padding-left: 1.5rem;
 }
 
-.services-footer ul li a {
-    font-weight: 600;
-    color: #e0e0e0;
-    /* Slightly brighter for better contrast with bold */
-}
-
+.footer-section.services-footer ul li a,
 .footer-section.links ul li a {
     font-weight: 600;
     color: #e0e0e0;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-section.services-footer ul li a:hover,
+.footer-section.links ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
 }
 
 .services-footer ul li::before {
@@ -544,6 +622,15 @@ footer {
     margin-top: 0.5rem;
     color: #ccc;
     font-size: 0.9em;
+}
+
+.location-areas-dark {
+    list-style: disc !important;
+    margin-left: 1.0rem;
+    margin-top: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9em;
+    font-weight: 600;
 }
 
 .location-areas li {
@@ -581,11 +668,73 @@ footer {
 }
 
 /* Responsive */
+.mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-mobile-message {
+    display: none;
+}
+
+/* Floating Call Button */
+.floating-call-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-call-btn:hover {
+    background-color: #d35400;
+    transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
+    .top-bar {
+        display: none;
+        /* Hide top bar on mobile as we now have the persistent button */
+    }
+
     .logo-img {
         height: auto;
         width: 80%;
-        max-width: 300px;
+        max-width: 200px;
+        /* Reduce logo size on mobile to fit button */
+    }
+
+    .mobile-actions {
+        display: flex;
+        z-index: 1001;
+        /* Ensure it stays above the menu */
+    }
+
+    .btn-mobile-message {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .desktop-message-btn {
+        display: none;
+        /* Hide in the actual drop-down menu */
+    }
+
+    .floating-call-btn {
+        display: block;
+        /* Show floating button on mobile */
     }
 
     .hero h1 {
@@ -603,6 +752,7 @@ footer {
         padding: 2rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         text-align: center;
+        margin-right: 0;
     }
 
     .nav-links.active {
@@ -731,23 +881,38 @@ footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.service-list-container p {
+dl.service-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+dl.service-list dt {
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    padding-left: 1.25rem;
+    position: relative;
+    margin-top: 1.25rem;
+}
+
+dl.service-list dt::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: -1px;
     color: var(--primary-color);
 }
 
-.service-list {
-    list-style-type: disc;
-    padding-left: 1.25rem;
-    margin: 0;
+dl.service-list dt:first-of-type {
+    margin-top: 0;
 }
 
-.service-list li {
-    margin-bottom: 0.5rem;
-    color: #555;
+dl.service-list dd {
+    margin-top: 0.25rem;
+    padding-left: 1.25rem;
+    color: #4a4a4a;
     font-size: 0.95rem;
-
+    font-weight: 400;
+    line-height: 1.5;
 }
 
 /* Gallery Wrapper for Hover Scroll */
