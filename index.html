@@ -4,56 +4,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Shoemaker Painting | Professional Painting Services</title>
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="canonical" href="https://shoemakerpainting.com/">
     <meta name="description"
-        content="Professional painting services for residential and commercial properties in Bloomington-Normal, Illinois, and surrounding areas. Elevate your interiors and exteriors with our skilled painters.">
+        content="Professional residential and commercial painting in Bloomington-Normal, Illinois. Family-owned and operated since 1975. Contact us today for a free estimate!">
+
+    <meta property="og:site_name" content="Shoemaker Painting">
+    <meta property="og:title" content="Shoemaker Painting | Professional Painting Services">
+    <meta property="og:description"
+        content="Professional residential and commercial painting in Bloomington-Normal, Illinois. Family-owned and operated since 1975. Contact us today for a free estimate!">
+    <meta property="og:url" content="https://shoemakerpainting.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://shoemakerpainting.com/images/best-painting-job.jpg">
+
+    <meta name="geo.region" content="US-IL" />
+    <meta name="geo.placename" content="Normal" />
+
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon-180.png">
+    <link rel="alternate icon" type="image/png" href="images/favicon-32.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
     <script src="script.js" defer></script>
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Shoemaker Painting",
-        "alternateName": ["Dennis Shoemaker Painting"],
-        "url": "https://shoemakerpainting.com/"
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://shoemakerpainting.com/#website",
+                "url": "https://shoemakerpainting.com/",
+                "name": "Shoemaker Painting",
+                "alternateName": "Dennis Shoemaker Painting",
+                "publisher": { "@id": "https://shoemakerpainting.com/#organization" }
+            },
+            {
+                "@type": ["HomeAndConstructionBusiness", "Painter"],
+                "@id": "https://shoemakerpainting.com/#organization",
+                "name": "Shoemaker Painting",
+                "url": "https://shoemakerpainting.com/",
+                "telephone": "+13098889102",
+                "priceRange": "$$",
+                "foundingDate": "1975",
+                "logo": "https://shoemakerpainting.com/images/icon.svg",
+                "image": "https://shoemakerpainting.com/images/best-painting-job.jpg",
+                "description": "Professional residential and commercial painting in Bloomington-Normal, Illinois. Family-owned and operated since 1975. Contact us today for a free estimate!",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Normal",
+                    "addressRegion": "IL",
+                    "addressCountry": "US"
+                },
+                "areaServed": [
+                    { "@type": "City", "name": "Bloomington, IL", "@id": "https://www.wikidata.org/wiki/Q285329" },
+                    { "@type": "City", "name": "Normal, IL", "@id": "https://www.wikidata.org/wiki/Q1000216" },
+                    { "@type": "City", "name": "Eureka, IL", "@id": "https://www.wikidata.org/wiki/Q574465" },
+                    { "@type": "City", "name": "El Paso, IL", "@id": "https://www.wikidata.org/wiki/Q575510" },
+                    { "@type": "AdministrativeArea", "name": "McLean County, IL", "@id": "https://www.wikidata.org/wiki/Q110255" },
+                    { "@type": "AdministrativeArea", "name": "Woodford County, IL", "@id": "https://www.wikidata.org/wiki/Q115617" }
+                ],
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                        "opens": "08:00",
+                        "closes": "16:00"
+                    }
+                ],
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Painting Services",
+                    "itemListElement": [
+                        {
+                            "@type": "Service",
+                            "name": "Interior Painting",
+                            "description": "Meticulous preparation for smooth, beautiful surfaces."
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Exterior Painting",
+                            "description": "Protect and beautify your home's exterior."
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Commercial Painting",
+                            "description": "Professional painting services for commercial properties throughout Central Illinois."
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Kitchen Cabinet Painting",
+                            "description": "Professional-grade coatings for cabinetry."
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Front Door Painting & Refinishing",
+                            "description": "Premium finishes to restore your home's curb appeal."
+                        },
+                        {
+                            "@type": "Service",
+                            "name": "Wood Staining & Refinishing",
+                            "description": "Expert staining and sealing for trim and millwork."
+                        }
+                    ]
+                }
+            }
+        ]
     }
     </script>
 </head>
 
 <body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <a href="tel:+13098889102" class="top-bar-phone">
+                    (309) 888-9102 <i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="container">
             <nav>
                 <a href="#home" class="logo-link">
-                    <img src="images/logo.svg" alt="Shoemaker Painting" class="logo-img">
+                    <img src="images/logo.svg"
+                        alt="Shoemaker Painting - Professional Painting Services in Central Illinois" class="logo-img">
                 </a>
-                <div class="menu-toggle" id="mobile-menu">
-                    <span>&#9776;</span>
+
+                <div class="mobile-actions">
+                    <a href="#contact" class="btn btn-outline btn-mobile-message">GET A QUOTE</a>
+                    <div class="menu-toggle" id="mobile-menu">
+                        <span>&#9776;</span>
+                    </div>
                 </div>
+
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Get
-                            a Quote</a></li>
+                    <li class="desktop-message-btn">
+                        <a href="#contact" class="btn btn-outline">GET A QUOTE</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Persistent Call Button -->
+    <a href="tel:+13098889102" class="floating-call-btn" aria-label="Call Now">
+        <i class="fas fa-phone"></i>
+    </a>
+
     <section id="home" class="hero">
         <div class="container">
-            <h1>Premier Painting for Your Home & Business</h1>
-            <p>Family-Owned & Operated Since 1975<br>
-                Proudly Serving McLean & Woodford Counties, Illinois</p>
+            <h1>Premier Painting for Your Home &amp; Business</h1>
+            <p>Family-Owned &amp; Operated Since 1975<br>
+                Proudly Serving McLean &amp; Woodford Counties, Illinois</p>
             <a href="#contact" class="btn btn-primary">Start Your Project</a>
         </div>
     </section>
@@ -65,47 +179,78 @@
                 <p>Tailored painting solutions for every project</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" id="interior">
                     <div class="service-icon">
-                        <img src="images/services/interior.svg" alt="Interior Painting Icon">
+                        <img src="images/services/interior.svg" alt="Interior Painting Icon" loading="lazy">
                     </div>
                     <h3>Interior Painting</h3>
                     <p>Meticulous preparation for smooth, beautiful surfaces.</p>
                     <div class="service-list-container">
-                        <p>Interior services include:</p>
-                        <ul class="service-list">
-                            <li>Painting</li>
-                            <li>Cabinet Painting</li>
-                            <li>Staining & Finishing</li>
-                            <li>Drywall & Plaster Repair</li>
-                            <li>Wallpaper Removal</li>
-                        </ul>
+                        <dl class="service-list">
+                            <dt>Walls, Ceilings &amp; Woodwork</dt>
+                            <dd>Trim, doors, windows, molding, baseboard, paneling, and shiplap</dd>
+                            <dt id="cabinets">Kitchen Cabinets</dt>
+                            <dd>Durable cabinet coatings that transform your kitchen</dd>
+                            <dt id="front-doors">Front Doors</dt>
+                            <dd>Professional refinishing to restore beauty and enhance your entryway</dd>
+                            <dt>Exposed Basement Ceilings</dt>
+                            <dd>Industrial-style black or white spray finishes for a clean, modern look</dd>
+                            <dt>Fine Finish Spraying</dt>
+                            <dd>Professional-grade coatings for a smooth, lasting finish</dd>
+                            <dt id="staining">Custom Staining, Clear Coats &amp; Refinishing</dt>
+                            <dd>Trim, doors, windows, and millwork</dd>
+                            <dt>Drywall &amp; Plaster Repair</dt>
+                            <dd>Restore damaged ceilings and walls prior to painting</dd>
+                            <dt>Wallpaper Removal</dt>
+                            <dd>Clean removal and prep for a paint-ready surface</dd>
+                        </dl>
                     </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" id="exterior">
                     <div class="service-icon">
-                        <img src="images/services/exterior.svg" alt="Exterior Painting Icon">
+                        <img src="images/services/exterior.svg" alt="Exterior Painting Icon" loading="lazy">
                     </div>
                     <h3>Exterior Painting</h3>
-                    <p>Protect and beautify your home's exterior. Durable coatings designed to withstand the elements.
+                    <p>Protect and enhance your home's exterior.
                     </p>
                     <div class="service-list-container">
-                        <p>Exterior services include:</p>
-                        <ul class="service-list">
-                            <li>Painting</li>
-                            <li>Staining & Sealing</li>
-                            <li>Pressure Washing</li>
-                            <li>Minor Repairs (wood rot, etc.)</li>
-                        </ul>
+                        <dl class="service-list">
+                            <dt>Siding, Trim &amp; Exterior Accents</dt>
+                            <dd>Doors, windows, shutters, fascia, soffits, and gutters</dd>
+                            <dt>Front Doors</dt>
+                            <dd>Professional refinishing to safeguard and boost curb appeal</dd>
+                            <dt>Garage Doors</dt>
+                            <dd>Refresh your garage doors to complement your home's exterior</dd>
+                            <dt id="deck-fence">Deck &amp; Fence Staining</dt>
+                            <dd>Extend the life of your deck or fence with high-performance stains</dd>
+                            <dt>Sealing &amp; Weatherproofing</dt>
+                            <dd>Preserve your exterior wood from moisture and sun damage</dd>
+                            <dt>Minor Repairs</dt>
+                            <dd>Replace damaged or rotted siding boards and trim prior to painting</dd>
+                            <dt>Pressure Washing</dt>
+                            <dd>Pre-paint cleaning to ensure proper adhesion and a lasting finish</dd>
+                        </dl>
                     </div>
                 </div>
-                <div class="service-card">
+                <div class="service-card" id="commercial">
                     <div class="service-icon">
-                        <img src="images/services/commercial.svg" alt="Commercial Painting Icon">
+                        <img src="images/services/commercial.svg" alt="Commercial Painting Icon" loading="lazy">
                     </div>
                     <h3>Commercial Painting</h3>
-                    <p>Professional painting services for offices, retail spaces, and commercial properties. Minimal
-                        disruption to your business.</p>
+                    <p>Bringing new life to commercial properties.</p>
+                    <div class="service-list-container">
+                        <dl class="service-list">
+                            <dt>Offices, Retail &amp; Managed Properties</dt>
+                            <dd>Professional painting for financial institutions, retail storefronts, and office
+                                interiors</dd>
+                            <dt>Specialized Coatings &amp; Finishes</dt>
+                            <dd>High-performance exterior paints, scuff-resistant interior coatings, and professional
+                                color matching</dd>
+                            <dt>Flexible &amp; Clean Operations</dt>
+                            <dd>After-hours scheduling, clean job sites, and minimal disruption to your daily operations
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,17 +262,17 @@
                 <div class="about-text">
                     <h2>About Us</h2>
                     <p>Shoemaker Painting has served Central Illinois for over 50 years, beginning in El Paso in 1975
-                        and proudly calling Normal, Illinois home for the past three decades.
+                        and proudly calling Normal, Illinois, home for the past three decades.
                         <br><br>
                         As a family-owned company, we've built our reputation on a simple commitment: putting our
-                        customers first. From protecting your furniture and flooring to performing daily site clean-ups,
+                        customers first. From protecting your furniture and flooring to performing daily site cleanups,
                         we treat your property with the utmost care and deliver professional results with minimal
-                        disruption to your daily life.
+                        disruption to your daily routine.
                     </p>
                 </div>
-                <!-- Placeholder for About Image -->
+
                 <div class="about-image">
-                    <img src="images/about.webp" alt="About Shoemaker Painting">
+                    <img src="images/about.webp" alt="About Shoemaker Painting" title="Dennis Shoemaker" loading="lazy">
                     <p class="about-image-caption">Our Founder, Dennis Shoemaker</p>
                 </div>
             </div>
@@ -138,25 +283,37 @@
         <div class="container">
             <div class="section-header">
                 <h2>Our Work</h2>
-                <p>Highlights from recent projects
-                    <br>Click the image to enlarge
+                <p>See highlights from our recent projects
+                    <br>Click any image to enlarge
                 </p>
             </div>
             <div class="gallery-wrapper">
                 <div class="scroll-area left"></div>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="images/gallery/gallery_01.webp" alt="Gallery Image 1"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_02.webp" alt="Gallery Image 2"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_03.webp" alt="Gallery Image 3"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_04.webp" alt="Gallery Image 4"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_05.webp" alt="Gallery Image 5"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_06.webp" alt="Gallery Image 6"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_07.webp" alt="Gallery Image 7"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_08.webp" alt="Gallery Image 8"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_09.webp" alt="Gallery Image 9"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_010.webp" alt="Gallery Image 10"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_011.webp" alt="Gallery Image 11"></div>
-                    <div class="gallery-item"><img src="images/gallery/gallery_012.webp" alt="Gallery Image 12"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_01.webp" alt="Gallery Image 1"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_02.webp" alt="Gallery Image 2"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_03.webp" alt="Gallery Image 3"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_04.webp" alt="Gallery Image 4"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_05.webp" alt="Gallery Image 5"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_06.webp" alt="Gallery Image 6"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_07.webp" alt="Gallery Image 7"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_08.webp" alt="Gallery Image 8"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_09.webp" alt="Gallery Image 9"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_010.webp" alt="Gallery Image 10"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_011.webp" alt="Gallery Image 11"
+                            loading="lazy"></div>
+                    <div class="gallery-item"><img src="images/gallery/gallery_012.webp" alt="Gallery Image 12"
+                            loading="lazy"></div>
                 </div>
                 <div class="scroll-area right"></div>
             </div>
@@ -167,17 +324,22 @@
         <div class="container">
             <div class="section-header">
                 <h2>Get In Touch</h2>
-                <p>Ready to start your project? Contact us today for a free estimate.</p>
+                <p>Ready to start your project? Contact us today for a free estimate or with any questions!</p>
             </div>
             <div class="contact-container">
                 <div class="contact-info">
                     <div>
                         <h3>Phone</h3>
-                        <p>(309) 888-9102</p>
+                        <p><a href="tel:+13098889102">(309) 888-9102</a></p>
                     </div>
                     <div>
                         <h3>Service Area</h3>
-                        <p>Bloomington-Normal, IL and Surrounding Areas</p>
+                        <p>Bloomington-Normal, IL, and surrounding areas</p>
+                        <ul class="location-areas-dark">
+                            <li>McLean County</li>
+                            <li>Woodford County</li>
+                        </ul>
+
                     </div>
                 </div>
                 <form class="contact-form" target="_blank" action="https://api.web3forms.com/submit" method="POST"
@@ -214,25 +376,27 @@
                 <!-- Brand Section -->
                 <div class="footer-section brand">
                     <div class="footer-brand-header">
-                        <img src="images/icon.svg" alt="Shoemaker Painting Logo" class="footer-logo">
-                        <h3>Shoemaker Painting</h3>
+                        <img src="images/icon.svg" alt="Shoemaker Painting Logo"
+                            title="Shoemaker Painting | Bloomington-Normal, IL" class="footer-logo">
                     </div>
-                    <p>Ready to give your home a fresh new look? As a local family-owned business, we're honored you're
+                    <p>Ready to give your home a fresh new look? As a local, family-owned business, we're honored you're
                         considering Shoemaker Painting. We look forward to working with you!</p>
+                    <img src="images/van.webp"
+                        alt="Shoemaker Painting professional work van with ladder rack in Normal, IL"
+                        title="Serving McLean & Woodford Counties since 1975" class="footer-van-img" loading="lazy">
                 </div>
 
                 <!-- Services -->
                 <div class="footer-section services-footer">
                     <h3>Our Services</h3>
                     <ul>
-                        <li><a href="#services">Interior</a></li>
-                        <li><a href="#services">Exterior</a></li>
-                        <li><a href="#services">Commercial</a></li>
-                        <li><a href="#services">Residential</a></li>
-                        <li><a href="#services">Cabinet Painting</a></li>
-                        <li><a href="#services">Staining & Finishing</a></li>
-                        <li><a href="#services">Drywall Repair</a></li>
-                        <li><a href="#services">Wallpaper Removal</a></li>
+                        <li><a href="#interior">Interior Painting</a></li>
+                        <li><a href="#exterior">Exterior Painting</a></li>
+                        <li><a href="#commercial">Commercial Painting</a></li>
+                        <li><a href="#staining">Staining &amp; Refinishing</a></li>
+                        <li><a href="#deck-fence">Deck &amp; Fence Staining</a></li>
+                        <li><a href="#cabinets">Kitchen Cabinet Refinishing</a></li>
+                        <li><a href="#front-doors">Front Door Refinishing</a></li>
                     </ul>
                 </div>
 
@@ -240,7 +404,7 @@
                 <div class="footer-section links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#home">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#gallery">Gallery</a></li>
@@ -255,7 +419,7 @@
                         <li class="contact-item-flex">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
-                                <strong>Serving Bloomington-Normal, IL and Surrounding Areas</strong>
+                                <strong>Serving Bloomington-Normal, IL, and surrounding areas</strong>
                                 <ul class="location-areas">
                                     <li>McLean County: Bloomington, Normal, Towanda, Hudson, Carlock, Lexington, Gridley
                                     </li>
@@ -265,8 +429,11 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><i class="fas fa-phone"></i> (309) 888-9102</li>
-                        <li><i class="fas fa-envelope"></i> info@shoemakerpainting.com</li>
+                        <li><i class="fas fa-phone"></i> <strong><a href="tel:+13098889102">(309) 888-9102</a></strong>
+                        </li>
+                        <li><i class="fas fa-envelope"></i> <strong><a
+                                    href="mailto:info@shoemakerpainting.com">info@shoemakerpainting.com</a></strong>
+                        </li>
                     </ul>
                 </div>
 
@@ -296,4 +463,3 @@
 </body>
 
 </html>
-
