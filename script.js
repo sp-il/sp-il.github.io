@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Disable right-click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 
@@ -66,8 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentIndex === galleryImages.length - 1 && imagesLoadedCount < TOTAL_IMAGES) {
             loadMoreImages();
             updateGalleryImages();
-            // currentIndex will be pointing to the same numerical index, but the array is now larger
-            // So just incrementing is fine
         }
 
         currentIndex = (currentIndex + 1) % galleryImages.length;
@@ -82,11 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup: Add click listeners to all gallery items
     document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        // We need to find the actual index among images, not just items (in case some items don't have images)
-        // But for simplicity, let's assume all .gallery-item contain images or we filter them.
-        // A better approach is to rebuild the list on click or keep the list correct.
-
-        // Let's rely on the image inside.
         const img = item.querySelector('img');
         if (img) {
             item.addEventListener('click', () => {
@@ -169,15 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate image filenames based on index
     // Filenames are 1-indexed: gallery_01.webp, gallery_02.webp, ... gallery_093.webp
     const getImageFilename = (index) => {
-        // Adjust for 0-indexed loop but 1-indexed filenames
         const fileIndex = index + 1;
-        // Prefix with '0' if single digit, but actually looking at the file list, 
-        // it seems standard to use 01, 02... 09, then 010, 011... 093 based on the file list provided earlier
-        // Wait, looking at the previous list_dir output:
-        // gallery_01.webp ... gallery_09.webp
-        // gallery_010.webp ... gallery_093.webp
-        // It seems the naming convention is 'gallery_0' + number + '.webp'
-
         return `gallery_0${fileIndex}.webp`;
     };
 
@@ -202,13 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add click event for lightbox (since these are new elements)
             galleryItem.addEventListener('click', () => {
-                // Determine the global index of this image
-                // We need to rebuild the galleryImages array or just push to it?
-                // The current implementation of openLightbox uses galleryImages array.
-                // We should make sure galleryImages is up to date.
-                // The simplest way with current logic is to just call updateGalleryImages() 
-                // but that queries the DOM every time. 
-                // Let's stick to the existing pattern: update list then open.
                 updateGalleryImages();
                 const clickedIndex = galleryImages.findIndex(image => image.src === img.src);
                 if (clickedIndex !== -1) {
@@ -220,9 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fragment.appendChild(galleryItem);
         }
 
-        // Append before the loader if it exists, or just to grid
-        // We will add a loader element in HTML or create it here?
-        // Let's assume we append to galleryGrid.
         galleryGrid.appendChild(fragment);
 
         imagesLoadedCount += imagesToLoad;
@@ -267,12 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     observer.observe(loader);
-
-    // Initial load is handled by the observer seeing the loader immediately 
-    // IF the gallery is empty. 
-    // BUT we want to start with some images. 
-    // If we remove all images from HTML, the loader will be visible and trigger load.
-    // That's a good clean approach.
 
     // Verify captcha is checked
     const form = document.getElementById('form');
