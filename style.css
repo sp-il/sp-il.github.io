@@ -1,15 +1,30 @@
 :root {
-    --primary-color: #2C3E50;
     /* Dark Slate Blue */
-    --secondary-color: #F8F9FA;
+    --primary-color: #2C3E50;
     /* Light Gray */
-    --accent-color: #E67E22;
+    --secondary-color: #F8F9FA;
     /* Muted Gold/Orange */
+    --accent-color: #E67E22;
+    --accent-hover: #D35400;
     --text-color: #333333;
     --white: #FFFFFF;
     --spacing-unit: 1rem;
     --font-primary: 'Inter', sans-serif;
-    /* Modern, clean font */
+    --header-height: 110px;
+    --mobile-header-height: 80px;
+
+    /* Text Colors */
+    --color-gray-medium: #666;
+    --color-gray-light: #ccc;
+    --color-gray-lighter: #e0e0e0;
+    --color-gray-muted: #888;
+    --color-gray-dark: #4a4a4a;
+    --border-color: #ddd;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --hero-overlay-color: rgba(44, 62, 80, 0.85);
+    --gallery-placeholder-bg: #ddd;
+    --form-success-color: #27ae60;
+    --lightbox-bg: rgba(0, 0, 0, 0.9);
 }
 
 /* Reset & Base Styles */
@@ -68,14 +83,9 @@ p {
 /* Top Bar */
 .top-bar {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--secondary-color);
     padding: 0.5rem 0;
     font-size: 0.9rem;
-}
-
-div.top-bar .container {
-    padding-right: 2rem;
-    padding-left: 2rem;
 }
 
 .top-bar-content {
@@ -85,7 +95,7 @@ div.top-bar .container {
 }
 
 .top-bar-phone {
-    color: var(--white);
+    color: var(--secondary-color);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -107,16 +117,37 @@ div.top-bar .container {
 header {
     background-color: var(--white);
     padding: 1.5rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px var(--shadow-light);
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+section {
+    scroll-margin-top: var(--header-height);
+}
+
+.service-card,
+dt[id] {
+    scroll-margin-top: calc(var(--header-height) + 2rem);
+}
+
+@media (max-width: 768px) {
+    section {
+        scroll-margin-top: var(--mobile-header-height);
+    }
+
+    .service-card,
+    dt[id] {
+        scroll-margin-top: calc(var(--mobile-header-height) + 1rem);
+    }
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
 }
 
 .logo-link {
@@ -166,11 +197,11 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('images/bg.webp');
+    background: linear-gradient(var(--hero-overlay-color), var(--hero-overlay-color)), url('images/bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: var(--white);
+    color: var(--secondary-color);
     padding: 8rem 0;
     text-align: center;
     position: relative;
@@ -179,7 +210,7 @@ nav {
 
 .hero h1 {
     font-size: 3.5rem;
-    color: var(--white);
+    color: var(--secondary-color);
     margin-bottom: 1.5rem;
     line-height: 1.1;
 }
@@ -205,13 +236,13 @@ nav {
 
 .btn-primary {
     background-color: var(--accent-color);
-    color: var(--white);
+    color: var(--secondary-color);
     border: 2px solid var(--accent-color);
 }
 
 .btn-primary:hover {
-    background-color: #D35400;
-    border-color: #D35400;
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
     transform: translateY(-2px);
 }
 
@@ -224,7 +255,7 @@ nav {
 .btn-outline:hover,
 .nav-links a.btn-outline:hover {
     background-color: var(--accent-color);
-    color: var(--white);
+    color: var(--secondary-color);
     transform: translateY(-2px);
 }
 
@@ -244,7 +275,7 @@ nav {
 }
 
 .section-header p {
-    color: #666;
+    color: var(--color-gray-medium);
 }
 
 .services-grid {
@@ -316,7 +347,7 @@ nav {
     background-color: var(--white);
     text-align: center;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-gray-medium);
     font-style: italic;
     margin: 0;
 }
@@ -356,7 +387,7 @@ nav {
     /* Allow width to adjust to content */
     height: 300px;
     /* Increased height for better visibility */
-    background-color: #ddd;
+    background-color: var(--gallery-placeholder-bg);
     /* Placeholder */
     border-radius: 4px;
     overflow: hidden;
@@ -364,7 +395,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
+    color: var(--color-gray-muted);
     scroll-snap-align: start;
     cursor: pointer;
     -webkit-backface-visibility: hidden;
@@ -433,7 +464,7 @@ nav {
 .form-group textarea {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-family: inherit;
     font-size: 1rem;
@@ -447,28 +478,30 @@ nav {
 .btn-submit {
     align-self: flex-start;
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--secondary-color);
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
-    background-color: #1a252f;
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
 }
 
 /* Footer */
 footer {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--secondary-color);
     padding: 4rem 0 2rem;
     font-size: 0.9rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 0.8fr 1.2fr;
-    /* Brand, Services, Quick Links, Contact */
-    gap: 3rem;
+    grid-template-columns: 1.3fr 1fr 0.7fr 2fr;
+    /* Brand, Services, Quick Links, Serving Area/Contact */
+    gap: 2rem;
     margin-bottom: 3rem;
     text-align: left;
 }
@@ -492,6 +525,11 @@ footer {
     height: auto;
     display: block;
     margin-top: 1rem;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-van-img:hover {
+    transform: translateX(15px);
 }
 
 .footer-section h3 {
@@ -500,6 +538,7 @@ footer {
     margin-bottom: 1.5rem;
     position: relative;
     padding-bottom: 0.5rem;
+    white-space: nowrap;
 }
 
 .footer-brand-header h3 {
@@ -518,11 +557,11 @@ footer {
     bottom: 0;
     width: 50px;
     height: 2px;
-    background-color: var(--white);
+    background-color: var(--secondary-color);
 }
 
 .footer-section p {
-    color: #ccc;
+    color: var(--color-gray-light);
     line-height: 1.6;
 }
 
@@ -550,33 +589,25 @@ footer {
     /* Align icon with first line of text */
 }
 
-.footer-section ul li a {
-    color: #ccc;
-    transition: color 0.3s ease;
+.footer-section ul li a,
+.footer-section.services-footer ul li a,
+.footer-section.links ul li a {
+    color: var(--color-gray-lighter);
+    font-weight: 600;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease, padding-left 0.3s ease;
 }
 
-.footer-section ul li a:hover {
+.footer-section ul li a:hover,
+.footer-section.services-footer ul li a:hover,
+.footer-section.links ul li a:hover {
     color: var(--accent-color);
-    padding-left: 5px;
+    transform: translateX(5px);
 }
 
 /* Center Services and Links columns */
 .footer-section.services-footer,
 .footer-section.links {
-    display: block;
-    /* Default block behavior */
-    text-align: left;
-}
-
-.footer-section.services-footer h3,
-.footer-section.links h3 {
-    width: 100%;
-    /* Full width */
-}
-
-.footer-section.services-footer ul,
-.footer-section.links ul {
-    width: 100%;
     text-align: left;
 }
 
@@ -585,18 +616,7 @@ footer {
     padding-left: 1.5rem;
 }
 
-.footer-section.services-footer ul li a,
-.footer-section.links ul li a {
-    font-weight: 600;
-    color: #e0e0e0;
-    transition: color 0.3s ease, padding-left 0.3s ease;
-}
-
-.footer-section.services-footer ul li a:hover,
-.footer-section.links ul li a:hover {
-    color: var(--accent-color);
-    padding-left: 5px;
-}
+/* Grouped above */
 
 .services-footer ul li::before {
     content: '\f00c';
@@ -612,30 +632,94 @@ footer {
 
 .contact-info-footer i {
     color: var(--accent-color);
-    margin-right: 10px;
+    margin-right: 12px;
     width: 20px;
     text-align: center;
+    font-size: 1.1rem;
 }
 
-.location-areas {
-    list-style: disc !important;
-    margin-left: 1.0rem;
-    margin-top: 0.5rem;
-    color: #ccc;
-    font-size: 0.9em;
+.footer-serving-area {
+    margin-bottom: 2rem;
+}
+
+.serving-title {
+    color: var(--color-gray-lighter);
+    font-size: 1.0rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.county-list p {
+    color: var(--color-gray-light);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.county-list p strong {
+    color: var(--color-gray-lighter);
+}
+
+.footer-contact-methods {
+    margin-top: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-gray-lighter);
+    font-size: 0.95rem;
+}
+
+.contact-method strong {
+    color: var(--color-gray-lighter);
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-method strong:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.phone-link {
+    color: var(--accent-color) !important;
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+    transform: translateX(5px);
+    color: var(--accent-hover) !important;
 }
 
 .location-areas-dark {
-    list-style: disc !important;
-    margin-left: 1.0rem;
+    list-style: none !important;
+    padding-left: 0;
     margin-top: 0.5rem;
-    color: var(--primary-color);
-    font-size: 0.9em;
-    font-weight: 600;
 }
 
-.location-areas li {
-    margin-bottom: 0.3rem;
+.location-areas-dark li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--color-gray-medium);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.location-areas-dark li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-gray-medium);
+    font-size: 1.0rem;
+    top: -2px;
 }
 
 .social-icons {
@@ -650,7 +734,7 @@ footer {
     width: 40px;
     height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
-    color: var(--white);
+    color: var(--secondary-color);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -664,7 +748,7 @@ footer {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #888;
+    color: var(--color-gray-muted);
     font-size: 0.85rem;
 }
 
@@ -701,6 +785,13 @@ footer {
 .floating-call-btn:hover {
     background-color: #d35400;
     transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem 2rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -755,7 +846,7 @@ footer {
         width: 100%;
         background-color: var(--white);
         padding: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 6px var(--shadow-light);
         text-align: center;
         margin-right: 0;
     }
@@ -794,7 +885,7 @@ footer {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--lightbox-bg);
 }
 
 .lightbox-content {
@@ -851,7 +942,7 @@ footer {
     width: auto;
     padding: 16px;
     margin-top: -50px;
-    color: white;
+    color: var(--secondary-color);
     font-weight: bold;
     font-size: 20px;
     transition: 0.6s ease;
@@ -914,7 +1005,7 @@ dl.service-list dt:first-of-type {
 dl.service-list dd {
     margin-top: 0.25rem;
     padding-left: 1.25rem;
-    color: #4a4a4a;
+    color: var(--color-gray-dark);
     font-size: 0.95rem;
     font-weight: 400;
     line-height: 1.5;
@@ -961,7 +1052,7 @@ dl.service-list dd {
 
     .scroll-area::after {
         content: '‹';
-        color: white;
+        color: var(--secondary-color);
         font-size: 3rem;
         font-weight: bold;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -997,4 +1088,11 @@ dl.service-list dd {
     .scroll-area.right:hover {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
     }
+}
+
+#form-success-message {
+    display: none;
+    color: var(--form-success-color);
+    font-weight: bold;
+    margin-top: 10px;
 }
