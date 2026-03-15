@@ -1,323 +1,1098 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Disable right-click
-    document.addEventListener('contextmenu', event => event.preventDefault());
+:root {
+    /* Dark Slate Blue */
+    --primary-color: #2C3E50;
+    /* Light Gray */
+    --secondary-color: #F8F9FA;
+    /* Muted Gold/Orange */
+    --accent-color: #E67E22;
+    --accent-hover: #D35400;
+    --text-color: #333333;
+    --white: #FFFFFF;
+    --spacing-unit: 1rem;
+    --font-primary: 'Inter', sans-serif;
+    --header-height: 110px;
+    --mobile-header-height: 80px;
 
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+    /* Text Colors */
+    --color-gray-medium: #666;
+    --color-gray-light: #ccc;
+    --color-gray-lighter: #e0e0e0;
+    --color-gray-muted: #888;
+    --color-gray-dark: #4a4a4a;
+    --border-color: #ddd;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --hero-overlay-color: rgba(44, 62, 80, 0.85);
+    --gallery-placeholder-bg: #ddd;
+    --form-success-color: #27ae60;
+    --lightbox-bg: rgba(0, 0, 0, 0.9);
+}
 
-    // Mobile Menu Toggle
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
-    });
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    width: 100%;
+    overflow-x: hidden;
+}
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
 
-    // Lightbox Functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.close-lightbox');
-    const prevBtn = document.getElementById('lightbox-prev');
-    const nextBtn = document.getElementById('lightbox-next');
-    let currentIndex = 0;
-    let galleryImages = []; // Array to store src of all gallery images
+ul {
+    list-style: none;
+}
 
-    // Collect all valid image sources from the gallery
-    const updateGalleryImages = () => {
-        galleryImages = [];
-        const items = document.querySelectorAll('.gallery-item img');
-        items.forEach(img => {
-            galleryImages.push({
-                src: img.src,
-                alt: img.alt
-            });
-        });
-    };
+img {
+    max-width: 100%;
+    display: block;
+}
 
-    // Open Lightbox
-    const openLightbox = (index) => {
-        if (galleryImages.length === 0) return;
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: var(--spacing-unit);
+    color: var(--primary-color);
+    font-weight: 700;
+}
 
-        currentIndex = index;
-        const image = galleryImages[currentIndex];
-        lightbox.style.display = "block";
-        lightboxImg.src = image.src;
-        lightboxImg.alt = image.alt;
-        document.body.style.overflow = "hidden";
-    };
+p {
+    margin-bottom: var(--spacing-unit);
+}
 
-    // Show Next Image
-    const showNext = () => {
-        // Check if we need to load more images
-        if (currentIndex === galleryImages.length - 1 && imagesLoadedCount < TOTAL_IMAGES) {
-            loadMoreImages();
-            updateGalleryImages();
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
-        currentIndex = (currentIndex + 1) % galleryImages.length;
-        openLightbox(currentIndex);
+/* Top Bar */
+.top-bar {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.top-bar-phone {
+    color: var(--secondary-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.top-bar-phone i {
+    color: var(--accent-color);
+    margin-right: -4px;
+    /* Compensate for internal font glyph padding to align edge perfectly */
+}
+
+.top-bar-phone:hover {
+    color: var(--accent-color);
+}
+
+/* Header */
+header {
+    background-color: var(--white);
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+section {
+    scroll-margin-top: var(--header-height);
+}
+
+.service-card,
+dt[id] {
+    scroll-margin-top: calc(var(--header-height) + 2rem);
+}
+
+@media (max-width: 768px) {
+    section {
+        scroll-margin-top: var(--mobile-header-height);
     }
 
-    // Show Previous Image
-    const showPrev = () => {
-        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-        openLightbox(currentIndex);
+    .service-card,
+    dt[id] {
+        scroll-margin-top: calc(var(--mobile-header-height) + 1rem);
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 72px;
+    width: auto;
+    max-width: 100%;
+    /* Ensure it doesn't overflow container on smaller screens if not caught by media query */
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Ensure the last nav item (message button) doesn't push away from the edge */
+.nav-links li:last-child {
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.desktop-message-btn .btn-outline {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(var(--hero-overlay-color), var(--hero-overlay-color)), url('images/bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--secondary-color);
+    padding: 8rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    border-radius: 4px;
+    /* Slightly rounded corners */
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-outline:hover,
+.nav-links a.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Services Section */
+.services {
+    padding: 6rem 0;
+    background-color: var(--white);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+}
+
+.section-header p {
+    color: var(--color-gray-medium);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    padding: 2.5rem;
+    background: var(--secondary-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+}
+
+.service-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon img {
+    transform: scale(1.1);
+}
+
+/* About Section */
+.about {
+    padding: 6rem 0;
+    background-color: var(--secondary-color);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.about-image-caption {
+    padding: 1rem;
+    background-color: var(--white);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-gray-medium);
+    font-style: italic;
+    margin: 0;
+}
+
+/* Gallery Section */
+.gallery {
+    padding: 6rem 0;
+    background-color: var(--white);
+}
+
+.gallery-grid {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--secondary-color);
+}
+
+.gallery-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-grid::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 4px;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    /* Allow width to adjust to content */
+    height: 300px;
+    /* Increased height for better visibility */
+    background-color: var(--gallery-placeholder-bg);
+    /* Placeholder */
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-muted);
+    scroll-snap-align: start;
+    cursor: pointer;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    min-width: 200px;
+    /* Ensure text placeholders aren't too thin */
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+.gallery-item img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    /* Ensure the whole image is seen if it doesn't match dimensions, though width:auto usually handles this */
+}
+
+/* Contact Section */
+.contact {
+    padding: 6rem 0;
+    background-color: var(--secondary-color);
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contact-info div {
+    margin-bottom: 1.5rem;
+}
+
+.contact-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.contact-info p {
+    margin-bottom: 0;
+}
+
+.contact-info a {
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 210px;
+    resize: vertical;
+}
+
+.btn-submit {
+    align-self: flex-start;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 4rem 0 2rem;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 0.7fr 2fr;
+    /* Brand, Services, Quick Links, Serving Area/Contact */
+    gap: 2rem;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.footer-brand-header {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    /* Aligns image top with h3 text line-height */
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo {
+    width: 45px;
+    height: auto;
+    display: block;
+}
+
+.footer-van-img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-top: 1rem;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-van-img:hover {
+    transform: translateX(15px);
+}
+
+.footer-section h3 {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
+}
+
+.footer-brand-header h3 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.footer-brand-header h3::after {
+    display: none;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+.footer-section p {
+    color: var(--color-gray-light);
+    line-height: 1.6;
+}
+
+.footer-section.brand p {
+    max-width: 280px;
+    /* Make brand text wrap sooner */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.contact-item-flex {
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact-item-flex i {
+    margin-top: 5px;
+    /* Align icon with first line of text */
+}
+
+.footer-section ul li a,
+.footer-section.services-footer ul li a,
+.footer-section.links ul li a {
+    color: var(--color-gray-lighter);
+    font-weight: 600;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-section ul li a:hover,
+.footer-section.services-footer ul li a:hover,
+.footer-section.links ul li a:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+/* Center Services and Links columns */
+.footer-section.services-footer,
+.footer-section.links {
+    text-align: left;
+}
+
+.services-footer ul li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+/* Grouped above */
+
+.services-footer ul li::before {
+    content: '\f00c';
+    /* FontAwesome check */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    top: 4px;
+}
+
+.contact-info-footer i {
+    color: var(--accent-color);
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.footer-serving-area {
+    margin-bottom: 2rem;
+}
+
+.serving-title {
+    color: var(--color-gray-lighter);
+    font-size: 1.0rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.county-list p {
+    color: var(--color-gray-light);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.county-list p strong {
+    color: var(--color-gray-lighter);
+}
+
+.footer-contact-methods {
+    margin-top: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-gray-lighter);
+    font-size: 0.95rem;
+}
+
+.contact-method strong {
+    color: var(--color-gray-lighter);
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-method strong:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.phone-link {
+    color: var(--accent-color) !important;
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+    transform: translateX(5px);
+    color: var(--accent-hover) !important;
+}
+
+.location-areas-dark {
+    list-style: none !important;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.location-areas-dark li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--color-gray-medium);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.location-areas-dark li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-gray-medium);
+    font-size: 1.0rem;
+    top: -2px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-gray-muted);
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+.mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-mobile-message {
+    display: none;
+}
+
+/* Floating Call Button */
+.floating-call-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-call-btn:hover {
+    background-color: #d35400;
+    transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        display: none;
+        /* Hide top bar on mobile as we now have the persistent button */
     }
 
-    // Initial setup: Add click listeners to all gallery items
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        const img = item.querySelector('img');
-        if (img) {
-            item.addEventListener('click', () => {
-                updateGalleryImages(); // Refresh list in case of dynamic changes (though static here)
-                // Find the index of this image in our collected array
-                const clickedIndex = galleryImages.findIndex(image => image.src === img.src);
-                if (clickedIndex !== -1) {
-                    openLightbox(clickedIndex);
-                }
-            });
-        }
-    });
-
-    // Event Listeners for Navigation
-    nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing lightbox
-        showNext();
-    });
-
-    prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing lightbox
-        showPrev();
-    });
-
-    // Keyboard Navigation
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === "block") {
-            if (e.key === "ArrowRight") showNext();
-            if (e.key === "ArrowLeft") showPrev();
-            if (e.key === "Escape") {
-                lightbox.style.display = "none";
-                document.body.style.overflow = "";
-            }
-        }
-    });
-
-    // Touch Navigation (Swipe)
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-
-    const handleSwipe = () => {
-        // Threshold for swipe detection (e.g., 50px)
-        if (touchEndX < touchStartX - 50) {
-            showNext(); // Swipe Left -> Next
-        }
-        if (touchEndX > touchStartX + 50) {
-            showPrev(); // Swipe Right -> Prev
-        }
-    };
-
-    // Close the lightbox
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.display = "none";
-        document.body.style.overflow = "";
-    });
-
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-            document.body.style.overflow = "";
-        }
-    });
-
-    // Infinite Scroll Implementation
-    const galleryGrid = document.querySelector('.gallery-grid');
-    const TOTAL_IMAGES = 93;
-    const LOAD_BATCH_SIZE = 12; // Adjusted to 12 for better grid alignment (divisible by 2, 3, 4)
-    let imagesLoadedCount = 12;
-
-    // Function to generate image filenames based on index
-    // Filenames are 1-indexed: gallery_01.webp, gallery_02.webp, ... gallery_093.webp
-    const getImageFilename = (index) => {
-        const fileIndex = index + 1;
-        return `gallery_0${fileIndex}.webp`;
-    };
-
-    const loadMoreImages = () => {
-        const remainingImages = TOTAL_IMAGES - imagesLoadedCount;
-        if (remainingImages <= 0) return;
-
-        const imagesToLoad = Math.min(LOAD_BATCH_SIZE, remainingImages);
-        const fragment = document.createDocumentFragment();
-
-        for (let i = 0; i < imagesToLoad; i++) {
-            const imgIndex = imagesLoadedCount + i;
-            const filename = getImageFilename(imgIndex);
-
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-
-            const img = document.createElement('img');
-            img.src = `images/gallery/${filename}`;
-            img.alt = `Gallery Image ${imgIndex + 1}`;
-            img.loading = 'lazy'; // Native lazy loading as well
-
-            // Add click event for lightbox (since these are new elements)
-            galleryItem.addEventListener('click', () => {
-                updateGalleryImages();
-                const clickedIndex = galleryImages.findIndex(image => image.src === img.src);
-                if (clickedIndex !== -1) {
-                    openLightbox(clickedIndex);
-                }
-            });
-
-            galleryItem.appendChild(img);
-            fragment.appendChild(galleryItem);
-        }
-
-        galleryGrid.appendChild(fragment);
-
-        imagesLoadedCount += imagesToLoad;
-
-        // Hide loader if all images loaded
-        if (imagesLoadedCount >= TOTAL_IMAGES) {
-            const loader = document.getElementById('gallery-loader');
-            if (loader) loader.style.display = 'none';
-        } else {
-            // Move loader to the end
-            const loader = document.getElementById('gallery-loader');
-            if (loader) {
-                galleryGrid.appendChild(loader);
-            }
-        }
-    };
-
-    // Intersection Observer for Infinite Scroll
-    const loader = document.createElement('div');
-    loader.id = 'gallery-loader';
-    loader.style.width = '50px'; // Fixed width for horizontal scroll
-    loader.style.minWidth = '50px'; // Prevent shrinking
-    loader.style.height = '100%'; // Full height
-    loader.style.display = 'flex';
-    loader.style.alignItems = 'center';
-    loader.style.justifyContent = 'center';
-
-    galleryGrid.appendChild(loader);
-
-    const observerOptions = {
-        root: galleryGrid, // Watch the scrolling container, not viewport
-        rootMargin: '0px 500px 0px 0px', // Load 500px before end (right side)
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                loadMoreImages();
-            }
-        });
-    }, observerOptions);
-
-    observer.observe(loader);
-
-    // Verify captcha is checked
-    const form = document.getElementById('form');
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
-            if (!hCaptcha) {
-                e.preventDefault();
-                alert("Please fill out captcha field");
-                return;
-            }
-            // Clear the form fields after a short delay so the submission can proceed
-            setTimeout(() => {
-                form.reset();
-                const successMsg = document.getElementById('form-success-message');
-                if (successMsg) {
-                    successMsg.style.display = 'block';
-                    // Hide the message after a few seconds
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 10000); // 10 seconds
-                }
-            }, 500);
-        });
+    .container {
+        padding: 0 1rem;
     }
 
-    // Hover Scroll Logic
-    const scrollContainer = document.querySelector('.gallery-grid');
-    const leftZone = document.querySelector('.scroll-area.left');
-    const rightZone = document.querySelector('.scroll-area.right');
-
-    let scrollInterval;
-    const SCROLL_DELAY = 600; // Time between scrolls (in ms) to allow smooth animation to finish
-
-    const startScrolling = (direction) => {
-        stopScrolling(); // Clear any existing interval
-
-        const scrollStep = () => {
-            // Calculate width dynamically in case of resize
-            const item = scrollContainer.querySelector('.gallery-item');
-            if (!item) return;
-
-            // Get accurate width + gap
-            const style = window.getComputedStyle(scrollContainer);
-            const gap = parseFloat(style.gap) || 24; // Default to 24px if gap parsing fails
-            const scrollAmount = item.offsetWidth + gap;
-
-            scrollContainer.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
-        };
-
-        // Scroll immediately on hover
-        scrollStep();
-
-        // Then continuously scroll at set interval
-        scrollInterval = setInterval(scrollStep, SCROLL_DELAY);
-    };
-
-    const stopScrolling = () => {
-        if (scrollInterval) {
-            clearInterval(scrollInterval);
-            scrollInterval = null;
-        }
-    };
-
-    if (leftZone && rightZone) {
-        leftZone.addEventListener('mouseenter', () => startScrolling('left'));
-        leftZone.addEventListener('mouseleave', stopScrolling);
-
-        rightZone.addEventListener('mouseenter', () => startScrolling('right'));
-        rightZone.addEventListener('mouseleave', stopScrolling);
+    .logo-img {
+        height: auto;
+        width: 80%;
+        max-width: 220px;
+        /* Balanced logo size to fit with the quote button on mobile */
     }
-});
 
+    .mobile-actions {
+        display: flex;
+        z-index: 1001;
+        /* Ensure it stays above the menu */
+    }
+
+    .btn-mobile-message {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .desktop-message-btn {
+        display: none;
+        /* Hide in the actual drop-down menu */
+    }
+
+    .floating-call-btn {
+        display: block;
+        /* Show floating button on mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        padding: 2rem;
+        box-shadow: 0 4px 6px var(--shadow-light);
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        /* Stack footer columns on mobile */
+        gap: 2rem;
+    }
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--lightbox-bg);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 900px;
+    max-height: 80vh;
+    object-fit: contain;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+    .lightbox-content {
+        width: 100%;
+    }
+}
+
+/* Lightbox Navigation */
+.lightbox-prev,
+.lightbox-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    z-index: 2001;
+}
+
+.lightbox-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.lightbox-prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Service List Styles */
+.service-list-container {
+    text-align: left;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+dl.service-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+dl.service-list dt {
+    font-weight: 600;
+    color: var(--primary-color);
+    padding-left: 1.25rem;
+    position: relative;
+    margin-top: 1.25rem;
+}
+
+dl.service-list dt::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    color: var(--primary-color);
+}
+
+dl.service-list dt:first-of-type {
+    margin-top: 0;
+}
+
+dl.service-list dd {
+    margin-top: 0.25rem;
+    padding-left: 1.25rem;
+    color: var(--color-gray-dark);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Gallery Wrapper for Hover Scroll */
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Scroll Areas */
+.scroll-area {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    width: 10%;
+    max-width: 40px;
+    z-index: 10;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.3s ease;
+    /* Gradient to indicate scroll direction */
+}
+
+.scroll-area.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.scroll-area.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.1), transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .scroll-area {
+        display: block;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .scroll-area::after {
+        content: '‹';
+        color: var(--secondary-color);
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .scroll-area.right::after {
+        content: '›';
+    }
+
+    .gallery-wrapper:hover .scroll-area {
+        /* Show zones slightly when hovering the gallery */
+        opacity: 1;
+    }
+
+    .gallery-wrapper:hover .scroll-area::after {
+        opacity: 0.7;
+        /* Visible but subtle when just hovering the gallery */
+    }
+
+    .scroll-area:hover {
+        /* Stronger indication on direct hover */
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+    }
+
+    .scroll-area:hover::after {
+        opacity: 1;
+        transform: scale(1.2);
+        /* Pop effect */
+    }
+
+    .scroll-area.right:hover {
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+    }
+}
+
+#form-success-message {
+    display: none;
+    color: var(--form-success-color);
+    font-weight: bold;
+    margin-top: 10px;
+}
