@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Close Lightbox
+    const closeLightbox = () => {
+        lightbox.style.display = "none";
+        document.body.style.overflow = "";
+    };
+
     // Open Lightbox
     const openLightbox = (index) => {
         if (galleryImages.length === 0) return;
@@ -65,18 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show Next Image
     const showNext = () => {
-        // Check if we need to load more images
-        if (currentIndex === galleryImages.length - 1 && imagesLoadedCount < TOTAL_IMAGES) {
+        // Proactively load the next batch when within 3 images of the end,
+        // so the DOM is ready before updateGalleryImages() reads it.
+        // (IntersectionObserver is too slow for rapid keyboard navigation.)
+        if (currentIndex >= galleryImages.length - 3 && imagesLoadedCount < TOTAL_IMAGES) {
             loadMoreImages();
-            updateGalleryImages();
         }
-
+        updateGalleryImages();
         currentIndex = (currentIndex + 1) % galleryImages.length;
         openLightbox(currentIndex);
     }
 
     // Show Previous Image
     const showPrev = () => {
+        updateGalleryImages();
         currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
         openLightbox(currentIndex);
     }
@@ -112,10 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightbox.style.display === "block") {
             if (e.key === "ArrowRight") showNext();
             if (e.key === "ArrowLeft") showPrev();
-            if (e.key === "Escape") {
-                lightbox.style.display = "none";
-                document.body.style.overflow = "";
-            }
+            if (e.key === "Escape") closeLightbox();
         }
     });
 
@@ -136,24 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Threshold for swipe detection (e.g., 50px)
         if (touchEndX < touchStartX - 50) {
             showNext(); // Swipe Left -> Next
-        }
-        if (touchEndX > touchStartX + 50) {
+        } else if (touchEndX > touchStartX + 50) {
             showPrev(); // Swipe Right -> Prev
         }
     };
 
     // Close the lightbox
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.display = "none";
-        document.body.style.overflow = "";
-    });
+    closeBtn.addEventListener('click', closeLightbox);
 
     // Close lightbox when clicking outside the image
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-            document.body.style.overflow = "";
-        }
+        if (e.target === lightbox) closeLightbox();
     });
 
     // Infinite Scroll Implementation
@@ -205,15 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         imagesLoadedCount += imagesToLoad;
 
-        // Hide loader if all images loaded
-        if (imagesLoadedCount >= TOTAL_IMAGES) {
-            const loader = document.getElementById('gallery-loader');
-            if (loader) loader.style.display = 'none';
-        } else {
-            // Move loader to the end
-            const loader = document.getElementById('gallery-loader');
-            if (loader) {
-                galleryGrid.appendChild(loader);
+        // Move loader to end, or hide it once all images are loaded
+        const loaderEl = document.getElementById('gallery-loader');
+        if (loaderEl) {
+            if (imagesLoadedCount >= TOTAL_IMAGES) {
+                loaderEl.style.display = 'none';
+            } else {
+                galleryGrid.appendChild(loaderEl);
             }
         }
     };
@@ -250,7 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form');
     if (form) {
         form.addEventListener('submit', function (e) {
-            const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+            const captchaEl = form.querySelector('textarea[name=h-captcha-response]');
+            const hCaptcha = captchaEl ? captchaEl.value : '';
             if (!hCaptcha) {
                 e.preventDefault();
                 alert("Please fill out captcha field");
@@ -271,8 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hover Scroll Logic
-    const scrollContainer = document.querySelector('.gallery-grid');
+    // Hover Scroll Logic (reuses galleryGrid declared above)
     const leftZone = document.querySelector('.scroll-area.left');
     const rightZone = document.querySelector('.scroll-area.right');
 
@@ -284,15 +280,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const scrollStep = () => {
             // Calculate width dynamically in case of resize
-            const item = scrollContainer.querySelector('.gallery-item');
+            const item = galleryGrid.querySelector('.gallery-item');
             if (!item) return;
 
             // Get accurate width + gap
-            const style = window.getComputedStyle(scrollContainer);
+            const style = window.getComputedStyle(galleryGrid);
             const gap = parseFloat(style.gap) || 24; // Default to 24px if gap parsing fails
             const scrollAmount = item.offsetWidth + gap;
 
-            scrollContainer.scrollBy({
+            galleryGrid.scrollBy({
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth'
             });
