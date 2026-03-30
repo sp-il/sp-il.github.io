@@ -579,15 +579,7 @@ footer {
     margin-bottom: 0.8rem;
 }
 
-.contact-item-flex {
-    display: flex;
-    align-items: flex-start;
-}
 
-.contact-item-flex i {
-    margin-top: 5px;
-    /* Align icon with first line of text */
-}
 
 .footer-section ul li a,
 .footer-section.services-footer ul li a,
@@ -1043,9 +1035,8 @@ dl.service-list dd {
 
 @media (hover: hover) and (pointer: fine) {
     .scroll-area {
-        display: block;
-        opacity: 0;
         display: flex;
+        opacity: 0;
         align-items: center;
         justify-content: center;
     }
