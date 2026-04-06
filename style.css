@@ -541,14 +541,7 @@ footer {
     white-space: nowrap;
 }
 
-.footer-brand-header h3 {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
 
-.footer-brand-header h3::after {
-    display: none;
-}
 
 .footer-section h3::after {
     content: '';
@@ -775,7 +768,7 @@ footer {
 }
 
 .floating-call-btn:hover {
-    background-color: #d35400;
+    background-color: var(--accent-hover);
     transform: scale(1.1);
 }
 
@@ -1084,6 +1077,13 @@ dl.service-list dd {
 #form-success-message {
     display: none;
     color: var(--form-success-color);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#form-error-message {
+    display: none;
+    color: #e74c3c;
     font-weight: bold;
     margin-top: 10px;
 }
