@@ -24,6 +24,7 @@
     --hero-overlay-color: rgba(44, 62, 80, 0.85);
     --gallery-placeholder-bg: #ddd;
     --form-success-color: #27ae60;
+    --form-error-color: #e74c3c;
     --lightbox-bg: rgba(0, 0, 0, 0.9);
 }
 
@@ -898,7 +899,7 @@ footer {
     position: absolute;
     top: 15px;
     right: 35px;
-    color: #f1f1f1;
+    color: var(--secondary-color);
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
@@ -907,7 +908,7 @@ footer {
 
 .close-lightbox:hover,
 .close-lightbox:focus {
-    color: #bbb;
+    color: var(--color-gray-light);
     text-decoration: none;
     cursor: pointer;
 }
@@ -963,7 +964,6 @@ footer {
 }
 
 dl.service-list {
-    list-style: none;
     padding-left: 0;
 }
 
@@ -1083,7 +1083,7 @@ dl.service-list dd {
 
 #form-error-message {
     display: none;
-    color: #e74c3c;
+    color: var(--form-error-color);
     font-weight: bold;
     margin-top: 10px;
 }
