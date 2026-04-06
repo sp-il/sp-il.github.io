@@ -1,19 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Disable right-click
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    // Auto-update copyright year
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+    // Disable right-click on gallery images and lightbox image
+    document.querySelector('.gallery-grid').addEventListener('contextmenu', event => {
+        if (event.target.tagName === 'IMG') event.preventDefault();
+    });
+    document.getElementById('lightbox').addEventListener('contextmenu', event => {
+        if (event.target.tagName === 'IMG') event.preventDefault();
+    });
 
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 
     // Mobile Menu Toggle
     menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', isOpen);
     });
 
     // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -90,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial setup: Add click listeners to all gallery items
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+    document.querySelectorAll('.gallery-item').forEach((item) => {
         const img = item.querySelector('img');
         if (img) {
             item.addEventListener('click', () => {
@@ -242,29 +252,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(loader);
 
-    // Verify captcha is checked
+    // Form submission via AJAX (fetch) for real success/error feedback
     const form = document.getElementById('form');
     if (form) {
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
             const captchaEl = form.querySelector('textarea[name=h-captcha-response]');
             const hCaptcha = captchaEl ? captchaEl.value : '';
+            const successMsg = document.getElementById('form-success-message');
+            const errorMsg = document.getElementById('form-error-message');
+
+            // Reset any existing messages
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+
+            // Captcha check
             if (!hCaptcha) {
-                e.preventDefault();
-                alert("Please fill out captcha field");
+                if (errorMsg) {
+                    errorMsg.textContent = 'Please complete the captcha before sending.';
+                    errorMsg.style.display = 'block';
+                    setTimeout(() => { errorMsg.style.display = 'none'; }, 5000);
+                }
                 return;
             }
-            // Clear the form fields after a short delay so the submission can proceed
-            setTimeout(() => {
-                form.reset();
-                const successMsg = document.getElementById('form-success-message');
-                if (successMsg) {
-                    successMsg.style.display = 'block';
-                    // Hide the message after a few seconds
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 10000); // 10 seconds
+
+            // Disable button while request is in flight
+            const submitBtn = form.querySelector('.btn-submit');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    form.reset();
+                    if (successMsg) {
+                        successMsg.style.display = 'block';
+                        setTimeout(() => { successMsg.style.display = 'none'; }, 10000);
+                    }
+                } else {
+                    if (errorMsg) {
+                        errorMsg.textContent = result.message || 'Something went wrong. Please try again.';
+                        errorMsg.style.display = 'block';
+                        setTimeout(() => { errorMsg.style.display = 'none'; }, 6000);
+                    }
                 }
-            }, 500);
+            } catch (err) {
+                if (errorMsg) {
+                    errorMsg.textContent = 'Network error. Please check your connection and try again.';
+                    errorMsg.style.display = 'block';
+                    setTimeout(() => { errorMsg.style.display = 'none'; }, 6000);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
+            }
         });
     }
 
